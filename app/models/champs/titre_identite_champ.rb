@@ -18,17 +18,7 @@ class Champs::TitreIdentiteChamp < Champ
   MAX_SIZE = 200.megabytes
 
   ACCEPTED_FORMATS = [
-    "text/plain",
     "application/pdf",
-    "application/msword",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application/vnd.ms-excel",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "application/vnd.ms-powerpoint",
-    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-    "application/vnd.oasis.opendocument.text",
-    "application/vnd.oasis.opendocument.presentation",
-    "application/vnd.oasis.opendocument.spreadsheet",
     "image/png",
     "image/jpeg"
   ]

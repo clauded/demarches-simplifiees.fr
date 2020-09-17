@@ -46,7 +46,9 @@ module Users
     end
 
     def demande
+      
       @dossier = dossier
+      raise
     end
 
     def messagerie
