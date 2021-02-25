@@ -4,6 +4,7 @@
 #
 #  id                   :integer          not null, primary key
 #  answer               :text
+#  claimant_type        :string
 #  confidentiel         :boolean          default(FALSE), not null
 #  email                :string
 #  introduction         :text
@@ -19,9 +20,8 @@ class Avis < ApplicationRecord
   include EmailSanitizableConcern
 
   belongs_to :dossier, inverse_of: :avis, touch: true, optional: false
-  belongs_to :instructeur, optional: true
   belongs_to :experts_procedure, optional: true
-  belongs_to :claimant, class_name: 'Instructeur', optional: false
+  belongs_to :claimant, polymorphic: true, optional: false
 
   has_one_attached :piece_justificative_file
   has_one_attached :introduction_file
@@ -43,7 +43,7 @@ class Avis < ApplicationRecord
   before_validation -> { sanitize_email(:email) }
   before_create :try_to_assign_instructeur
 
-  default_scope { joins(:dossier) }
+default_scope { joins(:dossier) }
   scope :with_answer, -> { where.not(answer: nil) }
   scope :without_answer, -> { where(answer: nil) }
   scope :for_dossier, -> (dossier_id) { where(dossier_id: dossier_id) }
@@ -104,7 +104,7 @@ class Avis < ApplicationRecord
       destroy!
     end
   end
-
+  
   private
 
   def try_to_assign_instructeur
