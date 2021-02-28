@@ -12,7 +12,10 @@ describe 'shared/dossiers/champs.html.haml', type: :view do
 
   context "there are some champs" do
     let(:dossier) { create(:dossier) }
-    let(:avis) { create :avis, dossier: dossier, instructeur: instructeur }
+    let(:expert) { create(:expert) }
+    let(:procedure) { dossier.procedure }
+    let(:experts_procedure) { ExpertsProcedure.create(expert: expert, procedure: procedure) }
+    let(:avis) { Avis.create(dossier: dossier, claimant: instructeur, experts_procedure: experts_procedure) }
     let(:champ1) { create(:champ_checkbox, dossier: dossier, value: "on") }
     let(:champ2) { create(:champ_header_section, dossier: dossier, value: "Section") }
     let(:champ3) { create(:champ_explication, dossier: dossier, value: "mazette") }
