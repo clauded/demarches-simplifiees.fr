@@ -55,7 +55,7 @@ class Avis < ApplicationRecord
   attr_accessor :invite_linked_dossiers
 
   def email_to_display
-    instructeur&.email || email
+    expert&.email
   end
 
   def self.link_avis_to_instructeur(instructeur)
